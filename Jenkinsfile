@@ -11,20 +11,20 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t student-management:v4 .'
+                sh 'docker build -t student-management:v4 .'
             }
         }
 
         stage('Load Image To Minikube') {
             steps {
-                bat 'minikube image load student-management:v4'
+                sh 'minikube image load student-management:v4'
             }
         }
 
         stage('Deploy To Kubernetes') {
             steps {
-                bat 'kubectl apply -f k8s/'
-                bat 'kubectl rollout restart deployment student-management'
+                sh 'kubectl apply -f k8s/'
+                sh 'kubectl rollout restart deployment student-management'
             }
         }
     }
